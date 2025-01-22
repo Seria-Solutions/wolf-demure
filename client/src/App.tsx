@@ -1,35 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <div className="h-screen w-screen flex flex-col items-center justify-center bg-gray-900 text-white">
+      {/* Title */}
+      <h1 className="text-4xl font-bold mb-4">Notin Spoil</h1>
+
+      {/* Subtitle */}
+      <h2 className="text-xl font-medium mb-6">A Pidgin Learning Tool</h2>
+
+      {/* Explanation */}
+      <p className="text-center max-w-md text-gray-300 leading-relaxed">
+        Learn Pidgin in a fun and interactive way! Whether you're a beginner or
+        looking to sharpen your skills,
+        <strong> Notin Spoil </strong> helps you master this vibrant language
+        through engaging examples and real-world scenarios.
       </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
