@@ -1,0 +1,54 @@
+version: '3.8' # Can be removed if using modern Compose
+
+services:
+  # PostgreSQL service
+  postgres-db:
+    image: postgres:latest
+    container_name: wolf-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  postgres-db-test:
+    image: postgres:latest
+    container_name: postgres-db-test
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: main-api-test
+    volumes:
+      - postgres-data-test:/var/lib/postgresql/data
+    ports:
+      - 5433:5432 # Avoids conflict with main PostgreSQL
+
+  # Redis service
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data # Ensure Redis data persists
+    command: ['redis-server', '--appendonly', 'yes'] # Enable persistence
+
+  # RedisInsight service
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    container_name: redisinsight
+    ports:
+      - '8001:8001' # Default RedisInsight UI port
+    volumes:
+      - redisinsight-data:/db
+    depends_on:
+      - redis
+
+volumes:
+  postgres-data:
+  postgres-data-test:
+  redis-data:
+  redisinsight-data:
